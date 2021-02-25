@@ -3,13 +3,6 @@
 "  / /|_  /\ \/ /  \ \ / /| | '_ ` _ \ 
 " / /_ / /  >  <    \ V / | | | | | | |
 "/____/___|/_/\_\    \_/  |_|_| |_| |_|
-                                      
-set encoding=utf-8
-set shortmess+=c
-set updatetime=100
-set termencoding=utf-8
-set fileencoding=utf-8
-"set shell=powershell.exe
 
 function! MySys()
     if has("win32")
@@ -18,6 +11,28 @@ function! MySys()
         return "linux"
     endif
 endfunction
+
+if has("win32")
+  if empty(glob('~/vimfiles/autoload/plug.vim'))
+    silent !iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` 
+          \ ni $HOME/vimfiles/autoload/plug.vim -Force
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+else
+  if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+  				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+endif
+
+set encoding=utf-8
+set shortmess+=c
+set updatetime=100
+set termencoding=utf-8
+set fileencoding=utf-8
+"set shell=powershell.exe
+
 let mapleader=" "
 filetype on
 filetype indent on
@@ -53,7 +68,6 @@ set showcmd
 set wildmenu
 set hlsearch
 let loaded_matchparen = 0
-"exec NoMatchParen
 set incsearch
 set ignorecase
 set smartcase
@@ -117,7 +131,9 @@ nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
 
 noremap <LEADER><CR> :nohl<CR>                
 if MySys() == 'windows'
-    nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/_vimrc<CR> 
+  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Documents/Github/ZzxVim/vimrc<CR> 
+else
+
 endif
 
 nnoremap <nowait><silent><LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
