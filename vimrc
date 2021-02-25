@@ -4,6 +4,7 @@
 " / /_ / /  >  <    \ V / | | | | | | |
 "/____/___|/_/\_\    \_/  |_|_| |_| |_|
 
+let mapleader=" "
 function! MySys()
     if has("win32")
         return "windows"
@@ -13,18 +14,21 @@ function! MySys()
 endfunction
 
 if has("win32")
+  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Documents/Github/ZzxVim/vimrc<CR> 
   if empty(glob('~/vimfiles/autoload/plug.vim'))
     silent !iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` 
           \ ni $HOME/vimfiles/autoload/plug.vim -Force
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 else
+  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Github/ZzxVim/vimrc<CR> 
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
   	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
   				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 endif
+
 
 set encoding=utf-8
 set shortmess+=c
@@ -33,7 +37,6 @@ set termencoding=utf-8
 set fileencoding=utf-8
 "set shell=powershell.exe
 
-let mapleader=" "
 filetype on
 filetype indent on
 filetype plugin on
@@ -96,10 +99,18 @@ noremap <nowait> <silent> <A-j> <Left>
 noremap <nowait> <silent> <A-l> <Right>
 noremap <nowait> <silent> <A-i> <Up>
 noremap <nowait> <silent> <A-k> <Down>
+noremap <nowait> <silent> j <Left>
+noremap <nowait> <silent> l <Right>
+noremap <nowait> <silent> i <Up>
+noremap <nowait> <silent> k <Down>
+
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
-noremap <nowait> <A-f> /
-cnoremap <nowait> <A-f> /
+noremap <nowait> <M-f> /
+cnoremap <nowait> <M-f> /
+noremap <nowait> f /
+cnoremap <nowait> f /
+
 nmap <CR> <nop>
 map s <nop>
 map <nowait> <silent> sl :set splitright<CR>:vsplit<CR>
@@ -115,6 +126,9 @@ map <nowait> <silent> th :-tabnext<CR>
 map <nowait> <silent> tl :+tabnext<CR>
 map <nowait> <silent> <A-h> <Home>
 map <nowait> <silent> <A-;> <End>
+map <nowait> <silent> h <Home>
+map <nowait> <silent> ; <End>
+
 map <nowait> ; :
 
 nnoremap <nowait> <silent> <up> :res +5<CR>
@@ -123,24 +137,25 @@ nnoremap <nowait> <silent> <left> :vertical resize -5<CR>
 nnoremap <nowait> <silent> <right> :vertical resize +5<CR>
 nnoremap <nowait> <silent> <A-q> :q!<CR>
 nnoremap <nowait> <silent> <A-w> :w<CR>
-nnoremap <nowait> <silent> <A-r> :source ~\_vimrc<CR>        
+nnoremap <nowait> <silent> q :q!<CR>
+nnoremap <nowait> <silent> w :w<CR>
+nnoremap <nowait> <silent> <A-r> :source $MYVIMRC<CR>        
+nnoremap <nowait> <silent> r :source $MYVIMRC<CR>        
+
 noremap <nowait> <silent> I 10<Up>                      
 noremap <nowait> <silent> K 10<Down>                       
-let g:isNerdTreeOpen = 0  
 nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
 
 noremap <LEADER><CR> :nohl<CR>                
-if MySys() == 'windows'
-  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Documents/Github/ZzxVim/vimrc<CR> 
-else
-
-endif
 
 nnoremap <nowait><silent><LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
 noremap! <nowait> <silent> <A-h> <Home>
 noremap! <nowait> <silent> <A-;> <End>
+noremap! <nowait> <silent> h <Home>
+noremap! <nowait> <silent> ; <End>
+
 noremap! <nowait>  ( ()<Left>
 noremap! <nowait>  { {}<Left>
 noremap! <nowait>  <A-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
@@ -155,6 +170,16 @@ noremap! <nowait> <silent> <A-b> <BS>
 noremap! <nowait>  <A-p> %
 noremap! <nowait>  <A-s> &
 noremap! <nowait> <silent> <A-u> <Esc><Undo>i
+
+noremap! <nowait> <silent> j <Left>
+noremap! <nowait> <silent> k <Down>
+noremap! <nowait> <silent> i <Up>
+noremap! <nowait> <silent> l <Right>
+noremap! <nowait> <silent> b <BS>
+noremap! <nowait>  p %
+noremap! <nowait>  s &
+noremap! <nowait> <silent> u <Esc><Undo>i
+
 "function ClosePair(char)
 "if getline('.')[col('.') - 1] == a:char
 "   return \"\<Right>"
@@ -165,8 +190,14 @@ noremap! <nowait> <silent> <A-u> <Esc><Undo>i
 exec 'nohl'
 autocmd TermOpen * startinsert
 
+let g:plug_file_path = ""
+if has("win32")
+  let g:plug_file_path = "~/vimfile/plugged"
+else
+  let g:plug_file_path = "~/.vim/plugged"
+endif
 
-call plug#begin('~/vimfiles/plugged')
+call plug#begin(plug_file_path)
 
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
