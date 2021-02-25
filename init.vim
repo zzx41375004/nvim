@@ -14,14 +14,12 @@ function! MySys()
 endfunction
 
 if has("win32")
-  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Documents/Github/ZzxVim/vimrc<CR> 
   if empty(glob('~/vimfiles/autoload/plug.vim'))
     silent !iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` 
           \ ni $HOME/vimfiles/autoload/plug.vim -Force
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 else
-  nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e ~/Github/ZzxVim/vimrc<CR> 
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
   	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
   				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -131,6 +129,7 @@ map <nowait> <silent> ; <End>
 
 map <nowait> ; :
 
+nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e $MYVIMRC<CR> 
 nnoremap <nowait> <silent> <up> :res +5<CR>
 nnoremap <nowait> <silent> <down> :res -5<CR>
 nnoremap <nowait> <silent> <left> :vertical resize -5<CR>
@@ -148,7 +147,7 @@ nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
 
 noremap <LEADER><CR> :nohl<CR>                
 
-nnoremap <nowait><silent><LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
+nnoremap <nowait> <LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
 noremap! <nowait> <silent> w <Esc>:w<CR>
@@ -174,6 +173,7 @@ noremap! <nowait>  <A-p> %
 noremap! <nowait>  <A-s> &
 noremap! <nowait> <silent> <A-u> <Esc><Undo>i
 
+noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
 noremap! <nowait> <silent> j <Left>
 noremap! <nowait> <silent> k <Down>
 noremap! <nowait> <silent> i <Up>
