@@ -151,6 +151,9 @@ noremap <LEADER><CR> :nohl<CR>
 nnoremap <nowait><silent><LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
+noremap! <nowait> <silent> w <Esc>:w<CR>
+noremap! <nowait> <silent> a <End><CR>
+
 noremap! <nowait> <silent> <A-h> <Home>
 noremap! <nowait> <silent> <A-;> <End>
 noremap! <nowait> <silent> h <Home>
@@ -188,7 +191,9 @@ noremap! <nowait> <silent> u <Esc><Undo>i
 "endif
 "endf
 exec 'nohl'
-autocmd TermOpen * startinsert
+if has("nvim")
+  autocmd TermOpen * startinsert
+endif
 
 let g:plug_file_path = ""
 if has("win32")
