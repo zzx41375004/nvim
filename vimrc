@@ -197,7 +197,7 @@ endif
 
 let g:plug_file_path = ""
 if has("win32")
-  let g:plug_file_path = "~/vimfile/plugged"
+  let g:plug_file_path = "~/vimfiles/plugged"
 else
   let g:plug_file_path = "~/.vim/plugged"
 endif
