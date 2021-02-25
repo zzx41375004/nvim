@@ -101,15 +101,16 @@ noremap <nowait> <silent> j <Left>
 noremap <nowait> <silent> l <Right>
 noremap <nowait> <silent> i <Up>
 noremap <nowait> <silent> k <Down>
-
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
 noremap <nowait> <M-f> /
-cnoremap <nowait> <M-f> /
+noremap <LEADER><CR> :nohl<CR>                
 noremap <nowait> f /
+noremap <nowait> <silent> I 10<Up>                      
+noremap <nowait> <silent> K 10<Down> 
+cnoremap <nowait> <M-f> /
 cnoremap <nowait> f /
 
-nmap <CR> <nop>
 map s <nop>
 map <nowait> <silent> sl :set splitright<CR>:vsplit<CR>
 map <nowait> <silent> sj :set nospr<CR>:vsplit<CR>
@@ -126,9 +127,9 @@ map <nowait> <silent> <A-h> <Home>
 map <nowait> <silent> <A-;> <End>
 map <nowait> <silent> h <Home>
 map <nowait> <silent> ; <End>
-
 map <nowait> ; :
 
+nmap <CR> <nop>
 nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e $MYVIMRC<CR> 
 nnoremap <nowait> <silent> <up> :res +5<CR>
 nnoremap <nowait> <silent> <down> :res -5<CR>
@@ -140,24 +141,18 @@ nnoremap <nowait> <silent> q :q!<CR>
 nnoremap <nowait> <silent> w :w<CR>
 nnoremap <nowait> <silent> <A-r> :source $MYVIMRC<CR>        
 nnoremap <nowait> <silent> r :source $MYVIMRC<CR>        
-
-noremap <nowait> <silent> I 10<Up>                      
-noremap <nowait> <silent> K 10<Down>                       
 nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
-
-noremap <LEADER><CR> :nohl<CR>                
+                      
 
 nnoremap <nowait> <LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
 noremap! <nowait> <silent> w <Esc>:w<CR>
 noremap! <nowait> <silent> a <End><CR>
-
 noremap! <nowait> <silent> <A-h> <Home>
 noremap! <nowait> <silent> <A-;> <End>
 noremap! <nowait> <silent> h <Home>
 noremap! <nowait> <silent> ; <End>
-
 noremap! <nowait>  ( ()<Left>
 noremap! <nowait>  { {}<Left>
 noremap! <nowait>  <A-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
@@ -172,7 +167,6 @@ noremap! <nowait> <silent> <A-b> <BS>
 noremap! <nowait>  <A-p> %
 noremap! <nowait>  <A-s> &
 noremap! <nowait> <silent> <A-u> <Esc><Undo>i
-
 noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
 noremap! <nowait> <silent> j <Left>
 noremap! <nowait> <silent> k <Down>
@@ -265,7 +259,6 @@ Plug 'fadein/vim-FIGlet'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'honza/vim-snippets'
 
-
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -356,9 +349,9 @@ nmap <leader>aw  <Plug>(coc-codeaction-selected)w
 " coc-tasks
 noremap <silent> <leader>ts :CocList tasks<CR>
 
-" coc-snippets
-
 color snazzy
+
+" coc-snippets
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 
@@ -379,8 +372,8 @@ vmap <A-o> <Plug>(coc-snippets-select)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
-map <silent> <nowait> <LEADER>b sl:call Compile()<CR>
-map <silent> <nowait> <LEADER>B sl:call Run()<CR>
+map <silent> <nowait> <LEADER>b :set splitright<CR>:vsplit<CR>:call Compile()<CR>
+map <silent> <nowait> <LEADER>B :set splitright<CR>:vsplit<CR>:call Run()<CR>
 
 let g:file_name = @%
 let file_exe_name = expand('%<').'.exe' 
@@ -390,33 +383,11 @@ func! Compile()
         exec '!clang % -o %<'
     elseif &filetype == 'cpp'
         exec 'te clang++ % -o tmp/%<.exe'
-    endif                                                                              
+    endif
 endfunc 
 
 func! Run()
-    if MySys() == 'linux'
-    elseif MySys() == 'windows'
-        exec 'te time ~/exefiles/%<.exe'
-    endif
+  if &filetype == 'cpp'
+    exec 'te time ~/exefiles/%<.exe'
+  endif
 endfunc
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2019 Jan 26
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings, bail
-" out.
-
-" Add optional packages.
-"
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
-
