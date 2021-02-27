@@ -128,6 +128,7 @@ map <nowait> <silent> <A-;> <End>
 map <nowait> <silent> h <Home>
 map <nowait> <silent> ; <End>
 map <nowait> ; :
+map <M-y> :w !/mnt/c/Windows/System32/clip.exe<CR>
 
 nmap <CR> <nop>
 nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e $MYVIMRC<CR> 
