@@ -55,9 +55,9 @@ set laststatus=2
 set autochdir
 set shortmess=atl
 set formatoptions=tcrqn
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"let &t_SI = \"<Esc>]50;CursorShape=1\x7"
+"let &t_SR = \"<Esc>]50;CursorShape=2\x7"
+"let &t_EI = \"<Esc>]50;CursorShape=0\x7"
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 let &t_ut=''
@@ -97,19 +97,13 @@ noremap <nowait> <silent> <A-j> <Left>
 noremap <nowait> <silent> <A-l> <Right>
 noremap <nowait> <silent> <A-i> <Up>
 noremap <nowait> <silent> <A-k> <Down>
-noremap <nowait> <silent> j <Left>
-noremap <nowait> <silent> l <Right>
-noremap <nowait> <silent> i <Up>
-noremap <nowait> <silent> k <Down>
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
 noremap <nowait> <M-f> /
 noremap <LEADER><CR> :nohl<CR>                
-noremap <nowait> f /
 noremap <nowait> <silent> I 10<Up>                      
 noremap <nowait> <silent> K 10<Down> 
 cnoremap <nowait> <M-f> /
-cnoremap <nowait> f /
 
 map s <nop>
 map <nowait> <silent> sl :set splitright<CR>:vsplit<CR>
@@ -125,8 +119,6 @@ map <nowait> <silent> th :-tabnext<CR>
 map <nowait> <silent> tl :+tabnext<CR>
 map <nowait> <silent> <A-h> <Home>
 map <nowait> <silent> <A-;> <End>
-map <nowait> <silent> h <Home>
-map <nowait> <silent> ; <End>
 map <nowait> ; :
 map <M-y> :w !/mnt/c/Windows/System32/clip.exe<CR>
 
@@ -138,22 +130,15 @@ nnoremap <nowait> <silent> <left> :vertical resize -5<CR>
 nnoremap <nowait> <silent> <right> :vertical resize +5<CR>
 nnoremap <nowait> <silent> <A-q> :q!<CR>
 nnoremap <nowait> <silent> <A-w> :w<CR>
-nnoremap <nowait> <silent> q :q!<CR>
-nnoremap <nowait> <silent> w :w<CR>
 nnoremap <nowait> <silent> <A-r> :source $MYVIMRC<CR>        
-nnoremap <nowait> <silent> r :source $MYVIMRC<CR>        
 nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
                       
 
 nnoremap <nowait> <LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
-noremap! <nowait> <silent> w <Esc>:w<CR>
-noremap! <nowait> <silent> a <End><CR>
 noremap! <nowait> <silent> <A-h> <Home>
 noremap! <nowait> <silent> <A-;> <End>
-noremap! <nowait> <silent> h <Home>
-noremap! <nowait> <silent> ; <End>
 noremap! <nowait>  ( ()<Left>
 noremap! <nowait>  { {}<Left>
 noremap! <nowait>  <A-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
@@ -169,14 +154,6 @@ noremap! <nowait>  <A-p> %
 noremap! <nowait>  <A-s> &
 noremap! <nowait> <silent> <A-u> <Esc><Undo>i
 noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
-noremap! <nowait> <silent> j <Left>
-noremap! <nowait> <silent> k <Down>
-noremap! <nowait> <silent> i <Up>
-noremap! <nowait> <silent> l <Right>
-noremap! <nowait> <silent> b <BS>
-noremap! <nowait>  p %
-noremap! <nowait>  s &
-noremap! <nowait> <silent> u <Esc><Undo>i
 
 "function ClosePair(char)
 "if getline('.')[col('.') - 1] == a:char
@@ -383,12 +360,12 @@ func! Compile()
     if &filetype == 'c' 
         exec '!clang % -o %<'
     elseif &filetype == 'cpp'
-        exec 'te clang++ % -o tmp/%<.exe'
+        exec 'te clang++ % -o %<.exe'
     endif
 endfunc 
 
 func! Run()
   if &filetype == 'cpp'
-    exec 'te time ~/exefiles/%<.exe'
+    exec 'te %<.exe'
   endif
 endfunc
