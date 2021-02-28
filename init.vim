@@ -73,7 +73,7 @@ set incsearch
 set ignorecase
 set smartcase
 set clipboard+=unnamed
-set mouse=a
+"set mouse=a
 set cursorline
 set cmdheight=1
 set noerrorbells
