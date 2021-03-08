@@ -27,7 +27,6 @@ else
   endif
 endif
 
-
 set encoding=utf-8
 set shortmess+=c
 set updatetime=100
@@ -55,6 +54,10 @@ set laststatus=2
 set autochdir
 set shortmess=atl
 set formatoptions=tcrqn
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
 "let &t_SI = \"<Esc>]50;CursorShape=1\x7"
 "let &t_SR = \"<Esc>]50;CursorShape=2\x7"
 "let &t_EI = \"<Esc>]50;CursorShape=0\x7"
@@ -63,6 +66,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 let &t_ut=''
 set nocompatible
 set number
+set relativenumber
 syntax on
 set wrap
 set showcmd
@@ -72,7 +76,7 @@ let loaded_matchparen = 0
 set incsearch
 set ignorecase
 set smartcase
-set clipboard+=unnamed
+set clipboard+=unnamed,unnamedplus
 "set mouse=a
 set cursorline
 set cmdheight=1
@@ -86,23 +90,23 @@ set pyxversion=3
 "set pythonthreedll=python39.dll
 "set fillchars=vert:\,stl:\,stlnc:\
 set hidden
-set relativenumber
 
 noremap <nowait> <silent> j <Left>
 noremap <nowait> <silent> h i
 noremap <nowait> <silent> i <Up>
 noremap <nowait> <silent> k <Down>
+noremap <nowait> <silent> I 10<Up>     
+noremap <nowait> <silent> K 10<Down>
 noremap <nowait> <silent> H I
-noremap <nowait> <silent> <A-j> <Left>
-noremap <nowait> <silent> <A-l> <Right>
-noremap <nowait> <silent> <A-i> <Up>
-noremap <nowait> <silent> <A-k> <Down>
+noremap <nowait> <silent> <A-j> <C-w><Left>
+noremap <nowait> <silent> <A-l> <C-w><Right>
+noremap <nowait> <silent> <A-i> <C-w><Up>
+noremap <nowait> <silent> <A-k> <C-w><Down>
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
 noremap <nowait> <M-f> /
-noremap <LEADER><CR> :nohl<CR>                
-noremap <nowait> <silent> I 10<Up>                      
-noremap <nowait> <silent> K 10<Down> 
+noremap <nowait> <silent> <LEADER><LEADER> :nohl<CR> 
+noremap <nowait> <silent> <M-o> <C-o> 
 cnoremap <nowait> <M-f> /
 
 map s <nop>
@@ -115,10 +119,10 @@ map <nowait> <silent> <C-j> <C-w><Left>
 map <nowait> <silent> <C-k> <C-w><Down>
 map <nowait> <silent> <C-i> <C-w><Up>
 map <nowait> <silent> tt :tabe<CR>
-map <nowait> <silent> th :-tabnext<CR>
+map <nowait> <silent> tj :-tabnext<CR>
 map <nowait> <silent> tl :+tabnext<CR>
-map <nowait> <silent> <A-h> <Home>
-map <nowait> <silent> <A-;> <End>
+map <nowait> <silent> <M-h> <Home>
+map <nowait> <silent> <M-;> <End>
 map <nowait> ; :
 map <M-y> :w !/mnt/c/Windows/System32/clip.exe<CR>
 
@@ -133,8 +137,7 @@ nnoremap <nowait> <silent> <A-w> :w<CR>
 nnoremap <nowait> <silent> <A-r> :source $MYVIMRC<CR>        
 nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
                       
-
-nnoremap <nowait> <LEADER>cc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
+nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
 noremap! <nowait> <silent> <A-h> <Home>
@@ -163,6 +166,7 @@ noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
 "endif
 "endf
 exec 'nohl'
+
 if has("nvim")
   autocmd TermOpen * startinsert
 endif
@@ -358,7 +362,7 @@ let file_exe_name = expand('%<').'.exe'
 
 func! Compile()
     if &filetype == 'c' 
-        exec '!clang % -o %<'
+        exec 'te clang % -o %<.exe'
     elseif &filetype == 'cpp'
         exec 'te clang++ % -o %<.exe'
     endif
@@ -366,6 +370,6 @@ endfunc
 
 func! Run()
   if &filetype == 'cpp'
-    exec 'te %<.exe'
+    exec 'te ./%<.exe'
   endif
 endfunc
