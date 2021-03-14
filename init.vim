@@ -175,7 +175,7 @@ let g:plug_file_path = ""
 if has("win32")
   let g:plug_file_path = "~/vimfiles/plugged"
 else
-  let g:plug_file_path = "~/.vim/plugged"
+  let g:plug_file_path = "~/.config/nvim/plugged"
 endif
 
 call plug#begin(plug_file_path)
@@ -362,9 +362,9 @@ let file_exe_name = expand('%<').'.exe'
 
 func! Compile()
     if &filetype == 'c' 
-        exec 'te clang % -o %<.exe'
+        exec 'te gcc % -o %<.exe'
     elseif &filetype == 'cpp'
-        exec 'te clang++ % -o %<.exe'
+        exec 'te g++ % -o %<.exe'
     endif
 endfunc 
 
