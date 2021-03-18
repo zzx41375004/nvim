@@ -373,3 +373,5 @@ func! Run()
     exec 'te ./%<.exe'
   endif
 endfunc
+
+exec 'highlight Cursor guibg=Red'
