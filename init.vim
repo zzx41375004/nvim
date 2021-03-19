@@ -140,8 +140,6 @@ nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait> <silent> <M-a> <End><CR>
-noremap! <nowait> <silent> <A-h> <Home>
-noremap! <nowait> <silent> <A-;> <End>
 noremap! <nowait>  ( ()<Left>
 noremap! <nowait>  { {}<Left>
 noremap! <nowait>  <A-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
@@ -157,6 +155,8 @@ noremap! <nowait>  <A-p> %
 noremap! <nowait>  <A-s> &
 noremap! <nowait> <silent> <A-u> <Esc><Undo>i
 noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
+
+inoremap <nowait> <M-h> </<C-X><C-O>
 
 "function ClosePair(char)
 "if getline('.')[col('.') - 1] == a:char
@@ -356,9 +356,10 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 
 map <silent> <nowait> <LEADER>b :set splitright<CR>:vsplit<CR>:call Compile()<CR>
 map <silent> <nowait> <LEADER>B :set splitright<CR>:vsplit<CR>:call Run()<CR>
+map <silent> <nowait> <M-n> ^:call Note()<CR>
 
-let g:file_name = @%
-let file_exe_name = expand('%<').'.exe' 
+"let g:file_name = @%
+"let file_exe_name = expand('%<').'.exe' 
 
 func! Compile()
     if &filetype == 'c' 
@@ -371,6 +372,22 @@ endfunc
 func! Run()
   if &filetype == 'cpp'
     exec 'te ./%<.exe'
+  endif
+endfunc
+
+func! Note()
+  if &filetype == 'cpp'
+    if getline(".")[col(".") - 1] == '/'
+      exec 's#^//#'
+    else
+      exec 's#^#//'
+    endif
+  elseif &filetype == 'vim'
+    if getline(".")[col(".") - 1] == '"'
+      silent :s#^"#
+    else
+      silent :s#^#"
+    endif
   endif
 endfunc
 
