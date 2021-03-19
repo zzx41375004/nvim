@@ -173,7 +173,7 @@ endif
 
 let g:plug_file_path = ""
 if has("win32")
-  let g:plug_file_path = "~/vimfiles/plugged"
+  let g:plug_file_path = "~/AppData/Local/nvim/plugged"
 else
   let g:plug_file_path = "~/.config/nvim/plugged"
 endif
