@@ -80,6 +80,7 @@ set clipboard+=unnamed,unnamedplus
 set clipboard+=unnamedplus
 "set mouse=a
 set cursorline
+"set cursorcolumn
 set cmdheight=1
 set noerrorbells
 set showmatch
@@ -93,6 +94,8 @@ set pyxversion=3
 set hidden
 
 noremap <nowait> <silent> j <Left>
+noremap <nowait> <silent> J 10<Left>
+noremap <nowait> <silent> L 10<Right>
 noremap <nowait> <silent> h i
 noremap <nowait> <silent> i <Up>
 noremap <nowait> <silent> k <Down>
@@ -105,8 +108,12 @@ noremap <nowait> <silent> <A-i> <C-w><Up>
 noremap <nowait> <silent> <A-k> <C-w><Down>
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
+noremap <nowait> <silent> <LEADER>ap ggVGP
+noremap <nowait> <silent> <LEADER>qj @j
+noremap <nowait> <silent> <LEADER>e :e!<CR>
 noremap <nowait> <M-f> /
-noremap <nowait> <silent> <LEADER><LEADER> :nohl<CR> 
+noremap <nowait> <silent> <LEADER><LEADER> :set nocursorcolumn<CR>:nohl<CR> 
+noremap <nowait> <silent> <LEADER>ll :set cursorcolumn<CR> 
 noremap <nowait> <silent> <M-o> <C-o> 
 cnoremap <nowait> <M-f> /
 
@@ -136,7 +143,8 @@ nnoremap <nowait> <silent> <right> :vertical resize +5<CR>
 nnoremap <nowait> <silent> <A-q> :q!<CR>
 nnoremap <nowait> <silent> <A-w> :w<CR>
 nnoremap <nowait> <silent> <A-r> :source $MYVIMRC<CR>        
-nnoremap <silent><nowait> ff :NERDTreeToggle<CR>
+nnoremap <silent><nowait> <LEADER>f :NERDTreeToggle<CR>
+noremap <nowait> <silent> <LEADER>w :w !sudo tee %<CR>
                       
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR> 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
@@ -182,6 +190,7 @@ endif
 call plug#begin(plug_file_path)
 
 "Plug 'vim-scripts/fcitx.vim'
+Plug 'crusoexia/vim-monokai'
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -242,6 +251,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'fadein/vim-FIGlet'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'honza/vim-snippets'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -349,7 +359,8 @@ let g:coc_snippet_next = '<a-k>'
 let g:coc_snippet_prev = '<a-i>'
 
 let g:NERDTreeMapOpenSplit = 's'
-
+autocmd FileType vim set commentstring="\ %s
+autocmd FileType c set commentstring=//\ %s
 " U<C-j> for both expand and jump (make expand higher priority.)
 imap <A-o> <Plug>(coc-snippets-expand-jump)
 vmap <A-o> <Plug>(coc-snippets-select)
@@ -358,7 +369,7 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 
 map <silent> <nowait> <LEADER>b :set splitright<CR>:vsplit<CR>:call Compile()<CR>
 map <silent> <nowait> <LEADER>B :set splitright<CR>:vsplit<CR>:call Run()<CR>
-map <silent> <nowait> <M-n> ^:call Note()<CR>
+map <silent> <nowait> <M-n> gcc
 
 "let g:file_name = @%
 "let file_exe_name = expand('%<').'.exe' 
@@ -377,13 +388,9 @@ func! Run()
   endif
 endfunc
 
-func! Note()
+function! Note()
   if &filetype == 'cpp'
-    if getline(".")[col(".") - 1] == '/'
-      exec 's#^//#'
-    else
-      exec 's#^#//'
-    endif
+    exec "normal! gcc"
   elseif &filetype == 'vim'
     if getline(".")[col(".") - 1] == '"'
       silent :s#^"#
@@ -391,7 +398,7 @@ func! Note()
       silent :s#^#"
     endif
   endif
-endfunc
+endfunction
 
 exec 'highlight Cursor guibg=Red'
 "##### auto fcitx  ###########

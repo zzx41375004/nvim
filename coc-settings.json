@@ -69,8 +69,7 @@
 		"json",
 		"python",
 		"vue",
-		"svelte",
-		"c"
+		"svelte"
 	],
 	"yaml.format.enable": true,
 	"signature.target": "float",
