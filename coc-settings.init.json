@@ -61,10 +61,6 @@
 	"list.previewHighlightGroup": "Statement",
 	"list.nextKeymap": "<C-e>",
 	"list.previousKeymap": "<C-u>",
-	"snippets.ultisnips.directories": [
-		"$HOME/.config/nvim/Ultisnips/",
-		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
-	],
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
 		"typescript",
@@ -73,9 +69,7 @@
 		"json",
 		"python",
 		"vue",
-		"svelte",
-		"c",
-		"prisma"
+		"svelte"
 	],
 	"yaml.format.enable": true,
 	"signature.target": "float",
@@ -100,18 +94,18 @@
 	"explorer.file.column.git.showIgnored": true,
 	"explorer.keyMappingMode": "none",
 	"explorer.buffer.showHiddenBuffers": false,
-	"explorer.keyMappings.global": {
+	"explorer.keyMappings": {
 		"u": "nodePrev",
 		"e": "nodeNext",
 		"h": "toggleSelection",
 		"<tab>": "actionMenu",
 		"gl": "expandRecursive",
 		"gh": "collapseRecursive",
-		"i": ["wait", "expandable?", "expand", "open"],
-		"<cr>": ["wait", "expandable?", "cd", "open"],
-		"I": "open:vsplit",
-		"o": ["wait", "expanded?", "collapse", "expand"],
-		"O": "open:tab",
+		"i": "open",
+		"<cr>": "open",
+		"I": "openInVsplit",
+		"o": "expand",
+		"O": "openInTab",
 		"n": "collapse",
 		"l": "gotoParent",
 		"yp": "copyFilepath",
@@ -203,12 +197,13 @@
 		"golang": {
 			"command": "gopls",
 			"rootPatterns": ["go.mod"],
-			"filetypes": ["go"],
-			"initializationOptions": {
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golint"
-			}
+			"filetypes": ["go"]
+			//	"initializationOptions": {
+			//		"gocodeCompletionEnabled": true,
+			//		"diagnosticsEnabled": true
+			//		"lintTool": "golint"
+			//"lintTool": "revive"
+			//	}
 		},
 		"bash": {
 			"command": "bash-language-server",
@@ -216,15 +211,16 @@
 			"filetypes": ["sh"],
 			"ignoredRootPaths": []
 		}
-		//"ccls": {
-		//	"command": "ccls",
-		//	"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-		//	"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
-		//	"initializationOptions": {
-		//		"cache": {
-		//			"directory": "/tmp/ccls"
+		//		"ccls": {
+		//			"command": "ccls",
+		//			"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+		//			"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
+		//			"initializationOptions": {
+		//				"cache": {
+		//					"directory": "/tmp/ccls"
+		//				}
+		//			}
 		//		}
 		//	}
-		//}
 	}
 }

@@ -74,6 +74,7 @@ syntax on
 set wrap
 set linebreak
 set showcmd
+set noshowmode
 set wildmenu
 set hlsearch
 let loaded_matchparen = 0

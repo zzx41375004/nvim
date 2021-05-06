@@ -8,11 +8,14 @@ endif
 
 call plug#begin(plug_file_path)
 
+Plug 'Raimondi/delimitMate'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
 "Plug 'vim-scripts/fcitx.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Taglist
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -74,6 +77,9 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 
 try
+
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 let g:coc_global_extensions = [
 \ 'coc-css',

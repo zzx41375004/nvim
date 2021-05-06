@@ -32,8 +32,8 @@ noremap <nowait> <M-f> /
 " noremap <nowait> <LEADER><LEADER> :set nocursorcolumn<CR>:nohl<CR>
 noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <nowait> <silent> <LEADER>ll :set cursorcolumn<CR>
-noremap <nowait> <silent> <M-o> <C-o>
-noremap <nowait> <silent> <M-p> <C-i>
+noremap <nowait> <silent> <M--> <C-o>
+noremap <nowait> <silent> <M-=> <C-i>
 cnoremap <nowait> <M-f> /
 noremap s <nop>
 noremap <nowait> <silent> si :set splitright<CR>:vsplit<CR>
@@ -63,7 +63,9 @@ nnoremap <nowait> <silent> <right> :vertical resize +5<CR>
 nnoremap <nowait> <silent> <M-q> :q!<CR>
 nnoremap <nowait> <silent> <M-w> :w<CR>
 nnoremap <nowait> <silent> <M-r> :source $MYVIMRC<CR>
-nnoremap <silent><nowait> tt :NERDTreeToggle<CR>
+nnoremap <silent><nowait> tt :tabe<CR>
+" nnoremap <nowait> <silent> <M-t> :CocCommand explorer<CR>
+nnoremap <nowait> <silent> <M-t> :RangerWorkingDirectoryNewTab<CR>
 noremap <nowait> <silent> <LEADER>w :w !sudo tee %<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
@@ -71,13 +73,28 @@ noremap <nowait> <silent> <Esc> :nohl<CR>:set nocursorcolumn<CR>
 
 
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
+
+" 括号补全
+
 noremap! <nowait>  ( ()<Left>
 noremap! <nowait>  { {}<Left>
 noremap! <nowait>  " ""<Left>
 noremap! <nowait>  ' ''<Left>
 noremap! <nowait>  [ []<Left>
 noremap! <nowait>  <M-[> {}<left><CR>1<CR><Up><Right><BS><Tab>
-" inoremap <nowait> <M-h> </<C-X><C-O>
+" inoremap <nowait> <silent> <BS> <Esc>:call IsSurround()<CR>a
+function! IsSurround()
+    let str=getline(".")
+    let pos=col(".")
+    if (str[pos-1]=='(' && str[pos]==')') || (str[pos-1]=='[' && str[pos]==']') ||(str[pos-1]=='{' && str[pos]=='}') ||(str[pos-1]=='<' && str[pos]=='>')
+        exec 'normal! xx'
+    else
+        exec 'normal! x'
+    endif
+    if col(".")==pos
+        exec 'normal! h'
+    endif
+endfunction
 
 " fold ant unfold
 noremap <LEADER>zf :call Fold()<CR>
