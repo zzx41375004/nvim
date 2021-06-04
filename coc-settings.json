@@ -61,10 +61,10 @@
 	"list.previewHighlightGroup": "Statement",
 	"list.nextKeymap": "<C-e>",
 	"list.previousKeymap": "<C-u>",
-	"snippets.ultisnips.directories": [
-		"$HOME/.config/nvim/Ultisnips/",
-		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
-	],
+	// "snippets.ultisnips.directories": [
+	// "$HOME/.config/nvim/Ultisnips/",
+	// "$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
+	// ],
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
 		"typescript",
@@ -205,9 +205,9 @@
 			"rootPatterns": ["go.mod"],
 			"filetypes": ["go"],
 			"initializationOptions": {
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golint"
+				// "gocodeCompletionEnabled": true
+				// "diagnosticsEnabled": true
+				// "lintTool": "golint"
 			}
 		},
 		"bash": {

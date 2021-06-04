@@ -8,7 +8,8 @@ endif
 
 call plug#begin(plug_file_path)
 
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 "Plug 'vim-scripts/fcitx.vim'
@@ -51,12 +52,19 @@ Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/indentpython.vim'
 
 " Markdown
+" Plug 'joker1007/vim-markdown-quote-syntax'
+" Plug 'tpope/vim-markdown'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'vimwiki/vimwiki'
 
 " Bookmarks
 Plug 'kshenoy/vim-signature'
+
+" Go
+Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Other useful utilities
 "Plug 'terryma/vim-multiple-cursors'
@@ -82,30 +90,34 @@ try
 " let g:airline#extensions#tabline#enabled = 1
 
 let g:coc_global_extensions = [
-\ 'coc-css',
-\ 'coc-diagnostic',
-\ 'coc-explorer',
-\ 'coc-flutter-tools',
-\ 'coc-gitignore',
-\ 'coc-html',
-\ 'coc-json',
-\ 'coc-lists',
-\ 'coc-prettier',
-\ 'coc-pyright',
-\ 'coc-python',
-\ 'coc-snippets',
-\ 'coc-sourcekit',
-\ 'coc-stylelint',
-\ 'coc-syntax',
-\ 'coc-tasks',
-\ 'coc-translator',
-\ 'coc-tslint-plugin',
-\ 'coc-tsserver',
-\ 'coc-vetur',
-\ 'coc-vimlsp',
-\ 'coc-yaml',
-\ 'coc-yank',
-\ 'coc-marketplace']
+    \ 'coc-css',
+    \ 'coc-diagnostic',
+    \ 'coc-eslint',
+    \ 'coc-explorer',
+    \ 'coc-flutter-tools',
+    \ 'coc-gitignore',
+    \ 'coc-html',
+    \ 'coc-import-cost',
+    \ 'coc-json',
+    \ 'coc-lists',
+    \ 'coc-prettier',
+    \ 'coc-prisma',
+    \ 'coc-pyright',
+    \ 'coc-python',
+    \ 'coc-snippets',
+    \ 'coc-sourcekit',
+    \ 'coc-stylelint',
+    \ 'coc-syntax',
+    \ 'coc-tailwindcss',
+    \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
+    \ 'coc-tasks',
+    \ 'coc-translator',
+    \ 'coc-tslint-plugin',
+    \ 'coc-tsserver',
+    \ 'coc-vetur',
+    \ 'coc-vimlsp',
+    \ 'coc-yaml',
+    \ 'coc-yank']
 
 " \ !pumvisible() ? \"\<TAB>" :
 inoremap <silent><expr> <TAB>
@@ -135,9 +147,11 @@ else
   call CocAction('doHover')
 endif
 endfunction
+
 nnoremap <LEADER>h :call Show_documentation()<CR>
 nnoremap <LEADER>c :CocCommand<CR>
-nnoremap <nowait><silent><LEADER>sn :set splitright<CR>:vsplit<CR>:CocCommand snippets.editSnippets<CR>
+nnoremap <nowait> <silent> <LEADER>sn :set splitright<CR>:vsplit<CR>:CocCommand snippets.editSnippets<CR>
+" nnoremap <LEADER>sn :CocCommand snippets.editSnippets<CR>
 " Text Objects
 "xmap kf <Plug>(coc-funcobj-i)
 "xmap af <Plug>(coc-funcobj-a)
@@ -198,6 +212,26 @@ imap <A-f> <Plug>(coc-snippets-expand-jump)
 vmap <A-f> <Plug>(coc-snippets-select)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
+
+" ===
+" === vim-instant-markdown
+" ===
+let g:instant_markdown_slow = 0
+let g:instant_markdown_autostart = 0
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 0
+" let g:instant_markdown_mathjax = 1
+let g:instant_markdown_autoscroll = 1
+let g:instant_markdown_browser = "google-chrome-stable --new-window"
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+\ 'syntax': 'markdown', 'ext': '.md'}]
+
+" autopair
+let g:AutoPairsShortcutJump = '<M-i>'
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutFastWrap = ''
 
 catch
 endtry

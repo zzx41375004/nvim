@@ -99,8 +99,8 @@ set pyxversion=3
 set hidden
 set tags=tags
 set tags+=./tags
+set fdm=marker
 
-source ~/.config/nvim/map.vim
 
 "function ClosePair(char)
 "if getline('.')[col('.') - 1] == a:char
@@ -115,19 +115,21 @@ exec 'nohl'
 " autocmd TermOpen * startinsert
 " endif
 
+source ~/.config/nvim/map.vim
 source ~/.config/nvim/plug.vim
 
 autocmd FileType vim setlocal commentstring=\"\ %s
-autocmd FileType c,cpp setlocal commentstring=//\ %s
+autocmd FileType c,cpp,json setlocal commentstring=//\ %s
 autocmd FileType py setlocal commentstring=\#\ %s
 
 autocmd WinLeave * setlocal nocursorline
 " autocmd WinEnter * setlocal cursorline
 autocmd BufEnter * setlocal cursorline
+autocmd BufEnter,BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufWritePre * :%s/\s\+$//e
 " U<C-j> for both expand and jump (make expand higher priority.)
 
-noremap <nowait> <LEADER>b :call Compile()<CR>
+noremap <nowait> <LEADER>bb :call Compile()<CR>
 noremap <LEADER>B :call ZzxRun()<CR>
 nmap <silent> <nowait> <M-k> gcc
 vmap <silent> <nowait> <M-k> gc
@@ -139,20 +141,27 @@ let file_exe_name = expand('%<').'.exe'
 let g:file_name = expand('%:t<')
 
 func! Compile()
-  if &filetype == 'cpp'
-    let name = g:file_whole_name
-    exec'tabe'
-    exec 'te g++ '.name.' -o ~/Documents/tmpAlgorithmResult.exe'
-    " call system('st -e sh -c \"g++ ' .g:file_name. ' -o ~/Documents/tmpAlgorithmResult.exe; read a"')
+    let name=g:file_whole_name
+    if &filetype == 'cpp'
+        exec 'tabe'
+        exec 'term g++ '.name.' -o ~/Documents/cpptmp.exe'
+    elseif &filetype == 'go'
+        exec 'tabe'
+        exec 'term go build'
+    "" call system('st -e sh -c \"g++ ' .g:file_name. ' -o ~/Documents/cpptmp.exe; read a"')
   endif
 endfunc
 
 function! ZzxRun()
   if &filetype == 'cpp'||'c'
-    call system('st -e sh -c "~/Documents/tmpAlgorithmResult.exe; read a"')
+    " exec 'tabe'
+    " exec 'term ~/Documents/tmpAlgorithmResult.exe'
+    call system('st -e sh -c "~/Documents/cpptmp.exe; echo; echo; echo [process end]; read a"')
    elseif &filetype == 'java'
      exec "!javac %"
      exec "!time java %<"
+   elseif &filetype == 'asm'
+       exec "!lc3as %<"
    elseif &filetype == 'sh'
      :!time bash %
      elseif &filetype == 'python'
@@ -174,9 +183,7 @@ function! ZzxRun()
      :sp
      :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
    elseif &filetype == 'go'
-     set splitbelow
-     :sp
-     :term go run .
+       call system('st -e sh -c "go run '.@%.'; echo; echo [ Process exit ]; read a"')
   endif
 endfunc
 
