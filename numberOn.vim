@@ -18,5 +18,14 @@ inoremap H ^
 inoremap N &
 inoremap E *
 inoremap I (
-inoremap O )
 
+inoremap q !
+inoremap w @
+inoremap f #
+inoremap p $
+inoremap g %
+inoremap j ^
+inoremap l &
+inoremap u *
+inoremap y (
+inoremap ; )

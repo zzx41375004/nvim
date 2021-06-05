@@ -21,4 +21,14 @@ inoremap I I
 inoremap O O
 
 
+inoremap q q
+inoremap w w
+inoremap f f
+inoremap p p
+inoremap g g
+inoremap j j
+inoremap l l
+inoremap u u
+inoremap y y
+inoremap ; ;
 

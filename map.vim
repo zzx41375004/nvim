@@ -1,3 +1,5 @@
+let g:numberStatus = 0
+
 noremap <nowait> <silent> <Space> <nop>
 noremap <nowait> <silent> ge gj
 noremap <nowait> <silent> gu gk
@@ -32,12 +34,15 @@ noremap <nowait> <silent> <LEADER>qn @n
 noremap <nowait> <silent> <LEADER>e :e!<CR>
 noremap <nowait> <M-f> /
 " noremap <nowait> <LEADER><LEADER> :set nocursorcolumn<CR>:nohl<CR>
-noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+"noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+inoremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <nowait> <silent> <LEADER>ll :set cursorcolumn<CR>
 noremap <nowait> <silent> <M--> <C-o>
 noremap <nowait> <silent> <M-=> <C-i>
 cnoremap <nowait> <M-f> /
 noremap s <nop>
+inoremap <M-o> <nop>
+" inoremap <M-e> <nop>
 noremap <nowait> <silent> si :set splitright<CR>:vsplit<CR>
 noremap <nowait> <silent> sn :set nospr<CR>:vsplit<CR>
 noremap <nowait> <silent> se :set splitbelow<CR>:split<CR>
@@ -63,15 +68,13 @@ nnoremap <nowait> <silent> <M-q> :q!<CR>
 nnoremap <nowait> <silent> <M-w> :w<CR>
 nnoremap <nowait> <silent> <M-r> :source $MYVIMRC<CR>
 inoremap <nowait> <silent> <M-r> <ESC>:source $MYVIMRC<CR>a
-" inoremap <nowait> <silent> <M-n> <ESC>:source ~/.config/nvim/numberOn.vim<CR>a
-" inoremap <nowait> <silent> <M-e> <ESC>:source ~/.config/nvim/numberOff.vim<CR>a
 nnoremap <silent><nowait> tt :tabe<CR>
 " nnoremap <nowait> <silent> <M-t> :CocCommand explorer<CR>
 nnoremap <nowait> <silent> <M-t> :RangerWorkingDirectoryNewTab<CR>
 noremap <nowait> <silent> <LEADER>ww :w !sudo tee %<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
-noremap <nowait> <silent> <Esc> :nohl<CR>:set nocursorcolumn<CR>
+noremap <nowait> <silent> <Esc> :nohl<CR>:set nocursorcolumn<CR>:source ~/.config/nvim/numberOff.vim<CR>:let b:numberStatus=0<cr>
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>"
 
 " fold and unfold {{{
@@ -119,63 +122,45 @@ vnoremap <nowait>   <Esc>
 " }}}
 
 " number key {{{
-" noremap <nowait>  <LEADER>na 1
-" noremap <nowait>  <LEADER>nr 2
-" noremap <nowait>  <LEADER>ns 3
-" noremap <nowait>  <LEADER>nt 4
-" noremap <nowait>  <LEADER>nd 5
-" noremap <nowait>  <LEADER>nh 6
-" noremap <nowait>  <LEADER>nn 7
-" noremap <nowait>  <LEADER>ne 8
-" noremap <nowait>  <LEADER>ni 9
-" noremap <nowait>  <LEADER>nA !
-" noremap <nowait>  <LEADER>nR @
-" noremap <nowait>  <LEADER>nS #
-" noremap <nowait>  <LEADER>nT $
-" noremap <nowait>  <LEADER>nD %
-" noremap <nowait>  <LEADER>nH ^
-" noremap <nowait>  <LEADER>nN &
-" noremap <nowait>  <LEADER>nE *
-" noremap <nowait>  <LEADER>nI (
-" noremap <nowait>  <LEADER>nO )
-" noremap! <nowait>  <M-a> 1
-" noremap! <nowait>  <M-A> !
-" noremap! <nowait>  <M-r> 2
-" noremap! <nowait>  <M-R> @
-" noremap! <nowait>  <M-s> 3
-" noremap! <nowait>  <M-S> #
-" noremap! <nowait>  <M-t> 4
-" noremap! <nowait>  <M-T> $
-" noremap! <nowait>  <M-d> 5
-" noremap! <nowait>  <M-D> %
-" noremap! <nowait>  <M-h> 6
-" noremap! <nowait>  <M-H> ^
-" noremap! <nowait>  <M-n> 7
-" noremap! <nowait>  <M-N> &
-" noremap! <nowait>  <M-e> 8
-" noremap! <nowait>  <M-E> *
-" noremap! <nowait>  <M-i> 9
-" noremap! <nowait>  <M-I> (
-" noremap! <nowait>  <M-o> 0
-" noremap! <nowait>  <M-O> )
-" inoremap <nowait>  1 -
-" inoremap <nowait>  2 =
-" inoremap <nowait>  3 +
-" inoremap <nowait>  4 _
+inoremap <nowait> tna 1
+inoremap <nowait> tnr 2
+inoremap <nowait> tns 3
+inoremap <nowait> tnt 4
+inoremap <nowait> tnd 5
+inoremap <nowait> tnh 6
+inoremap <nowait> tnn 7
+inoremap <nowait> tne 8
+inoremap <nowait> tni 9
+inoremap <nowait> tno 0
+inoremap <nowait> tnq !
+inoremap <nowait> tnw @
+inoremap <nowait> tnf #
+inoremap <nowait> tnp $
+inoremap <nowait> tng %
+inoremap <nowait> tnj ^
+inoremap <nowait> tnl &
+inoremap <nowait> tnu *
+inoremap <nowait> tny (
+inoremap <nowait> tn; )
+
+inoremap <nowait>  1 -
+inoremap <nowait>  2 =
+inoremap <nowait>  3 +
+inoremap <nowait>  4 _
 inoremap <nowait>  <M-l> ()<left>
 inoremap <nowait>  <M-u> []<left>
 inoremap <nowait>  <M-y> <end>{}<left>
-inoremap <nowait>  <Esc>
+imap <nowait>  <Esc>
 
 " imap aa <c-r>=1+1<cr>
-let b:numberStatus = 0
 inoremap <silent> <nowait> <M-n> <c-r>=Numbertoggle()<cr>
+inoremap <silent> <nowait> ` <c-r>=Numbertoggle()<cr>
 function! Numbertoggle()
-    if b:numberStatus == 0
-        let b:numberStatus=1
+    if g:numberStatus == 0
+        let g:numberStatus=1
         source ~/.config/nvim/numberOn.vim
     else
-        let b:numberStatus=0
+        let g:numberStatus=0
         source ~/.config/nvim/numberOff.vim
     endif
     return ""
