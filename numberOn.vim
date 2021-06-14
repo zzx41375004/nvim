@@ -1,23 +1,23 @@
-inoremap a 1
-inoremap r 2
-inoremap s 3
-inoremap t 4
-inoremap d 5
-inoremap h 6
-inoremap n 7
-inoremap e 8
-inoremap i 9
-inoremap o 0
+inoremap <nowait> a 1
+inoremap <nowait> r 2
+inoremap <nowait> s 3
+inoremap <nowait> t 4
+inoremap <nowait> d 5
+inoremap <nowait> h 6
+inoremap <nowait> n 7
+inoremap <nowait> e 8
+inoremap <nowait> i 9
+inoremap <nowait> o 0
 
-inoremap A !
-inoremap R @
-inoremap S #
-inoremap T $
-inoremap D %
-inoremap H ^
-inoremap N &
-inoremap E *
-inoremap I (
+inoremap <nowait> A !
+inoremap <nowait> R @
+inoremap <nowait> S #
+inoremap <nowait> T $
+inoremap <nowait> D %
+inoremap <nowait> H ^
+inoremap <nowait> N &
+inoremap <nowait> E *
+inoremap <nowait> I (
 
 inoremap q !
 inoremap w @

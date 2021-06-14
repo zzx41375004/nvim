@@ -34,8 +34,8 @@ noremap <nowait> <silent> <LEADER>qn @n
 noremap <nowait> <silent> <LEADER>e :e!<CR>
 noremap <nowait> <M-f> /
 " noremap <nowait> <LEADER><LEADER> :set nocursorcolumn<CR>:nohl<CR>
-"noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
-inoremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+inoremap <nowait> <silent> tn<LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <nowait> <silent> <LEADER>ll :set cursorcolumn<CR>
 noremap <nowait> <silent> <M--> <C-o>
 noremap <nowait> <silent> <M-=> <C-i>
@@ -142,6 +142,7 @@ inoremap <nowait> tnl &
 inoremap <nowait> tnu *
 inoremap <nowait> tny (
 inoremap <nowait> tn; )
+inoremap <nowait> tn<Enter> \n
 
 inoremap <nowait>  1 -
 inoremap <nowait>  2 =

@@ -20,7 +20,6 @@ inoremap E E
 inoremap I I
 inoremap O O
 
-
 inoremap q q
 inoremap w w
 inoremap f f
