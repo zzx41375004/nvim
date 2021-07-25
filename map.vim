@@ -80,7 +80,7 @@ noremap! <nowait>  <Esc>
 noremap <nowait> <silent> <M-o> o<Esc>O
 nnoremap > >>
 nnoremap < <<
-
+nnoremap <leader>lg :call system('st -e sh -c lazygit')<cr>
 " fold and unfold {{{
 noremap zo za
 noremap <LEADER>zf :call Fold()<CR>
