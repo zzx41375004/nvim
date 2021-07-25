@@ -93,7 +93,6 @@ let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-diagnostic',
     \ 'coc-eslint',
-    \ 'coc-explorer',
     \ 'coc-flutter-tools',
     \ 'coc-gitignore',
     \ 'coc-html',
@@ -208,8 +207,8 @@ let g:coc_snippet_prev = '<a-u>'
 let g:NERDTreeMapOpenSplit = 's'
 
 " U<C-j> for both expand and jump (make expand higher priority.)
-imap <A-f> <Plug>(coc-snippets-expand-jump)
-vmap <A-f> <Plug>(coc-snippets-select)
+imap <M-e> <Plug>(coc-snippets-expand-jump)
+vmap <M-e> <Plug>(coc-snippets-select)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 

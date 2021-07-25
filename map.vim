@@ -24,8 +24,8 @@ noremap <nowait> <silent> i l
 noremap <nowait> <silent> h i
 noremap <nowait> <silent> u k
 noremap <nowait> <silent> e j
-noremap <nowait> <silent> U 10<Up>
-noremap <nowait> <silent> E 10<Down>
+nnoremap <nowait> <silent> U 10<Up>
+nnoremap <nowait> <silent> E 10<Down>
 noremap <nowait> <silent> H I
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
@@ -76,6 +76,10 @@ nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
 noremap <nowait> <silent> <Esc> :nohl<CR>:set nocursorcolumn<CR>:source ~/.config/nvim/numberOff.vim<CR>:let b:numberStatus=0<cr>
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>"
+noremap! <nowait>  <Esc>
+noremap <nowait> <silent> <M-o> o<Esc>O
+nnoremap > >>
+nnoremap < <<
 
 " fold and unfold {{{
 noremap zo za
@@ -132,16 +136,16 @@ inoremap <nowait> tnn 7
 inoremap <nowait> tne 8
 inoremap <nowait> tni 9
 inoremap <nowait> tno 0
-inoremap <nowait> tnq !
-inoremap <nowait> tnw @
-inoremap <nowait> tnf #
-inoremap <nowait> tnp $
-inoremap <nowait> tng %
-inoremap <nowait> tnj ^
-inoremap <nowait> tnl &
-inoremap <nowait> tnu *
-inoremap <nowait> tny (
-inoremap <nowait> tn; )
+inoremap <nowait> tnA !
+inoremap <nowait> tnR @
+inoremap <nowait> tnS #
+inoremap <nowait> tnT $
+inoremap <nowait> tnD %
+inoremap <nowait> tnH ^
+inoremap <nowait> tnN &
+inoremap <nowait> tnE *
+inoremap <nowait> tnI (
+inoremap <nowait> tnO )
 inoremap <nowait> tn<Enter> \n
 
 inoremap <nowait>  1 -
@@ -154,7 +158,7 @@ inoremap <nowait>  <M-y> <end>{}<left>
 imap <nowait>  <Esc>
 
 " imap aa <c-r>=1+1<cr>
-inoremap <silent> <nowait> <M-n> <c-r>=Numbertoggle()<cr>
+inoremap <silent> <nowait> <M-h> <c-r>=Numbertoggle()<cr>
 inoremap <silent> <nowait> ` <c-r>=Numbertoggle()<cr>
 function! Numbertoggle()
     if g:numberStatus == 0
@@ -168,5 +172,4 @@ function! Numbertoggle()
 endfunc
 
 " }}}
-
 

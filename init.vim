@@ -27,6 +27,7 @@ else
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 endif
+
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set shortmess+=c
@@ -101,14 +102,6 @@ set tags=tags
 set tags+=./tags
 set fdm=marker
 
-
-"function ClosePair(char)
-"if getline('.')[col('.') - 1] == a:char
-"   return \"\<Right>"
-"else
-"    return a:char
-"endif
-"endf
 exec 'nohl'
 
 " if has("nvim")
@@ -126,6 +119,7 @@ autocmd WinLeave * setlocal nocursorline
 " autocmd WinEnter * setlocal cursorline
 autocmd BufEnter * setlocal cursorline
 autocmd BufEnter,BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufEnter,BufRead,BufNewFile vifmrc set filetype=vim
 autocmd BufWritePre * :%s/\s\+$//e
 " U<C-j> for both expand and jump (make expand higher priority.)
 
@@ -145,6 +139,9 @@ func! Compile()
     if &filetype == 'cpp'
         exec 'tabe'
         exec 'term g++ '.name.' -o ~/Documents/cpptmp.exe'
+    elseif &filetype == 'c'
+        exec 'tabe'
+        exec 'term gcc '.name.' -o ~/Documents/ctmp.exe'
     elseif &filetype == 'go'
         exec 'tabe'
         exec 'term go build'
@@ -153,18 +150,18 @@ func! Compile()
 endfunc
 
 function! ZzxRun()
-  if &filetype == 'cpp'||'c'
-    " exec 'tabe'
-    " exec 'term ~/Documents/tmpAlgorithmResult.exe'
-    call system('st -e sh -c "~/Documents/cpptmp.exe; echo; echo; echo [process end]; read a"')
-   elseif &filetype == 'java'
-     exec "!javac %"
-     exec "!time java %<"
-   elseif &filetype == 'asm'
+    if &filetype == 'cpp'
+        call system('st -e sh -c "~/Documents/cpptmp.exe; echo; echo; echo [process end]; read a"')
+    elseif &filetype == 'c'
+        call system('st -e sh -c "~/Documents/ctmp.exe; echo; echo; echo [process end]; read a"')
+    elseif &filetype == 'java'
+       exec "!javac %"
+       exec "!time java %<"
+    elseif &filetype == 'asm'
        exec "!lc3as %<"
-   elseif &filetype == 'sh'
+    elseif &filetype == 'sh'
      :!time bash %
-     elseif &filetype == 'python'
+   elseif &filetype == 'python'
      set splitbelow
      :sp
      :term python3 %
@@ -213,6 +210,4 @@ exec 'highlight Cursor guibg=Red'
 " 进入插入模式
 " autocmd InsertEnter * call Fcitx2zh()
 " ##### auto fcitx end ######
-
-" map <nowait> <M-b> :w<CR>:te g++ % -o ~/Documents/tmpAlgorithmResult.exe<CR>
-" map <nowait> <M-B> :te ~/Documents/tmpAlgorithmResult.exe<CR>
+"
