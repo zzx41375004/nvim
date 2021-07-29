@@ -1,6 +1,25 @@
 let g:numberStatus = 0
 
-noremap <nowait> <silent> <Space> <nop>
+if !has('nvim')
+    for i in range(97,122)
+        let c = nr2char(i)
+        exec "set <M-.".c.">=\e".c.""
+    endfor
+    exec "set <M-->=\e-"
+    exec "set <M-=>=\e="
+endif
+
+command! -bar SplitRight :set splitright|:vsplit
+command! EditMap SplitRight|exec 'e '.g:VIMPATH.'/map.vim'
+command! EditPlug SplitRight|exec 'e '.g:VIMPATH.'/plug.vim'
+command! MyEsc :nohl|:set nocursorcolumn|exec 'source '.g:VIMPATH.'/numberOff.vim'|:let g:numberStatus=0
+
+
+nnoremap <nowait><silent> <LEADER>rc :SplitRight<CR>:e $MYVIMRC<CR>
+nnoremap <nowait><silent> <LEADER>mp :EditMap<CR>
+nnoremap <nowait><silent> <LEADER>pl :EditPlug<CR>
+nnoremap <nowait> <silent> <Esc> :MyEsc<CR>
+
 noremap <nowait> <silent> ge gj
 noremap <nowait> <silent> gu gk
 noremap <nowait> <silent> b B
@@ -35,7 +54,7 @@ noremap <nowait> <silent> <LEADER>e :e!<CR>
 noremap <nowait> <M-f> /
 " noremap <nowait> <LEADER><LEADER> :set nocursorcolumn<CR>:nohl<CR>
 noremap <nowait> <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
-inoremap <nowait> <silent> tn<LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+inoremap <nowait> <silent> tn<LEADER> <++>
 noremap <nowait> <silent> <LEADER>ll :set cursorcolumn<CR>
 noremap <nowait> <silent> <M--> <C-o>
 noremap <nowait> <silent> <M-=> <C-i>
@@ -51,15 +70,13 @@ noremap <nowait> <silent> <M-I> <C-w><Right>
 noremap <nowait> <silent> <M-N> <C-w><Left>
 noremap <nowait> <silent> <M-E> <C-w><Down>
 noremap <nowait> <silent> <M-U> <C-w><Up>
-noremap <nowait> <silent> <LEADER>t :tabe<CR>
-noremap <nowait> <silent> tn :-tabnext<CR>
-noremap <nowait> <silent> ti :+tabnext<CR>
+noremap <nowait> <silent> <LEADER>ta :tabe<CR>
+noremap <nowait> <silent> tt :NERDTreeToggle<CR>
+noremap <nowait> <silent> <M-n> :-tabnext<CR>
+noremap <nowait> <silent> <M-i> :+tabnext<CR>
 noremap <nowait> ; :
 
 " nmap <CR> <nop>
-nnoremap <nowait><silent><LEADER>rc :set splitright<CR>:vsplit<CR>:e $MYVIMRC<CR>
-nnoremap <nowait><silent><LEADER>mp :set splitright<CR>:vsplit<CR>:e ~/.config/nvim/map.vim<CR>
-nnoremap <nowait><silent><LEADER>pl :set splitright<CR>:vsplit<CR>:e ~/.config/nvim/plug.vim<CR>
 nnoremap <nowait> <silent> <up> :res +5<CR>
 nnoremap <nowait> <silent> <down> :res -5<CR>
 nnoremap <nowait> <silent> <left> :vertical resize -5<CR>
@@ -68,21 +85,20 @@ nnoremap <nowait> <silent> <M-q> :q!<CR>
 nnoremap <nowait> <silent> <M-w> :w<CR>
 nnoremap <nowait> <silent> <M-r> :source $MYVIMRC<CR>
 inoremap <nowait> <silent> <M-r> <ESC>:source $MYVIMRC<CR>a
-nnoremap <silent><nowait> tt :tabe<CR>
 " nnoremap <nowait> <silent> <M-t> :CocCommand explorer<CR>
 nnoremap <nowait> <silent> <M-t> :RangerWorkingDirectoryNewTab<CR>
 noremap <nowait> <silent> <LEADER>ww :w !sudo tee %<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
-noremap <nowait> <silent> <Esc> :nohl<CR>:set nocursorcolumn<CR>:source ~/.config/nvim/numberOff.vim<CR>:let b:numberStatus=0<cr>
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>"
 noremap! <nowait>  <Esc>
 noremap <nowait> <silent> <M-o> o<Esc>O
 nnoremap > >>
 nnoremap < <<
-nnoremap <leader>lg :call system('st -e sh -c lazygit')<cr>
+nnoremap <LEADER>LG :call system('st -e sh -c lazygit')<cr>
+nnoremap <silent> <LEADER>ff :silent Vifm<CR>
 " fold and unfold {{{
-noremap zo za
+noremap <LEADER>o za
 noremap <LEADER>zf :call Fold()<CR>
 function! Fold()
     if &filetype=='cpp'
@@ -155,7 +171,7 @@ inoremap <nowait>  4 _
 inoremap <nowait>  <M-l> ()<left>
 inoremap <nowait>  <M-u> []<left>
 inoremap <nowait>  <M-y> <end>{}<left>
-imap <nowait>  <Esc>
+inoremap <nowait>  <Esc>
 
 " imap aa <c-r>=1+1<cr>
 inoremap <silent> <nowait> <M-h> <c-r>=Numbertoggle()<cr>
@@ -163,10 +179,10 @@ inoremap <silent> <nowait> ` <c-r>=Numbertoggle()<cr>
 function! Numbertoggle()
     if g:numberStatus == 0
         let g:numberStatus=1
-        source ~/.config/nvim/numberOn.vim
+        exec 'source '.g:VIMPATH.'/numberOn.vim'
     else
         let g:numberStatus=0
-        source ~/.config/nvim/numberOff.vim
+        exec 'source '.g:VIMPATH.'/numberOff.vim'
     endif
     return ""
 endfunc

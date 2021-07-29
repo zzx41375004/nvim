@@ -13,19 +13,14 @@ function! MySys()
     endif
 endfunction
 
+let g:plug_file_path = ""
 
 if has("win32")
-  if empty(glob('~/vimfiles/autoload/plug.vim'))
-    silent !iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
-          \ ni $HOME/vimfiles/autoload/plug.vim -Force
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  endif
+    let g:plug_file_path = "~/AppData/Local/nvim/plugged"
+    let g:VIMPATH = "~/AppData/Local/nvim"
 else
-  if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-  				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  endif
+    let g:plug_file_path = "~/.config/nvim/plugged"
+    let g:VIMPATH = "~/.config/nvim"
 endif
 
 set encoding=utf-8
@@ -54,6 +49,7 @@ set indentexpr=
 set backspace=indent,eol,start
 "set foldmethod=indent
 "set foldlevel=99
+set foldmethod=marker
 set laststatus=2
 set autochdir
 set shortmess=atl
@@ -100,7 +96,6 @@ set pyxversion=3
 set hidden
 set tags=tags
 set tags+=./tags
-set fdm=marker
 
 exec 'nohl'
 
@@ -108,17 +103,21 @@ exec 'nohl'
 " autocmd TermOpen * startinsert
 " endif
 
-source ~/.config/nvim/map.vim
-source ~/.config/nvim/plug.vim
+exec 'source '.g:VIMPATH.'/map.vim'
+exec 'source '.g:VIMPATH.'/plug.vim'
+" source ~/.config/nvim/map.vim
+" source ~/.config/nvim/plug.vim
 
 autocmd FileType vim setlocal commentstring=\"\ %s
 autocmd FileType c,cpp,json setlocal commentstring=//\ %s
 autocmd FileType py setlocal commentstring=\#\ %s
+autocmd FileType markdown setlocal commentstring=<!--\ %s\-->
 
 autocmd WinLeave * setlocal nocursorline
 " autocmd WinEnter * setlocal cursorline
 autocmd BufEnter * setlocal cursorline
 autocmd BufEnter,BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufEnter,BufRead,BufNewFile *.md set fdm=marker
 autocmd BufEnter,BufRead,BufNewFile vifmrc set filetype=vim
 autocmd BufWritePre * :%s/\s\+$//e
 " U<C-j> for both expand and jump (make expand higher priority.)

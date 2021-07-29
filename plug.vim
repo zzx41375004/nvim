@@ -8,6 +8,7 @@ endif
 
 call plug#begin(plug_file_path)
 
+Plug 'vifm/vifm.vim'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'rbgrouleff/bclose.vim'
@@ -15,7 +16,7 @@ Plug 'francoiscabrol/ranger.vim'
 "Plug 'vim-scripts/fcitx.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Taglist
@@ -83,8 +84,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 
 call plug#end()
-
-try
 
 " let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
@@ -228,9 +227,47 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " autopair
-let g:AutoPairsShortcutJump = '<M-i>'
+" let g:AutoPairsShortcutJump = '<M-i>'
+let g:AutoPairsShortcutJump = '<M-0>'
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutFastWrap = ''
 
-catch
-endtry
+" nerdtree {{{
+let g:NERDTreeMapCustomOpen      = get(g:, 'NERDTreeMapCustomOpen',      '<CR>')
+let g:NERDTreeMapActivateNode    = get(g:, 'NERDTreeMapActivateNode',    'o')
+let g:NERDTreeMapChangeRoot      = get(g:, 'NERDTreeMapChangeRoot',      'C')
+let g:NERDTreeMapChdir           = get(g:, 'NERDTreeMapChdir',           'cd')
+let g:NERDTreeMapCloseChildren   = get(g:, 'NERDTreeMapCloseChildren',   'X')
+let g:NERDTreeMapCloseDir        = get(g:, 'NERDTreeMapCloseDir',        'x')
+let g:NERDTreeMapDeleteBookmark  = get(g:, 'NERDTreeMapDeleteBookmark',  'D')
+let g:NERDTreeMapMenu            = get(g:, 'NERDTreeMapMenu',            'm')
+let g:NERDTreeMapHelp            = get(g:, 'NERDTreeMapHelp',            '?')
+let g:NERDTreeMapJumpParent      = get(g:, 'NERDTreeMapJumpParent',      'p')
+let g:NERDTreeMapJumpRoot        = get(g:, 'NERDTreeMapJumpRoot',        'P')
+let g:NERDTreeMapOpenExpl        = get(g:, 'NERDTreeMapOpenExpl',        'j')
+let g:NERDTreeMapOpenInTab       = get(g:, 'NERDTreeMapOpenInTab',       'ta')
+let g:NERDTreeMapOpenInTabSilent = get(g:, 'NERDTreeMapOpenInTabSilent', 'T')
+let g:NERDTreeMapOpenRecursively = get(g:, 'NERDTreeMapOpenRecursively', 'O')
+let g:NERDTreeMapOpenSplit       = get(g:, 'NERDTreeMapOpenSplit',       'S')
+let g:NERDTreeMapOpenVSplit      = get(g:, 'NERDTreeMapOpenVSplit',      's')
+let g:NERDTreeMapPreview         = get(g:, 'NERDTreeMapPreview',         'g'.NERDTreeMapActivateNode)
+let g:NERDTreeMapPreviewSplit    = get(g:, 'NERDTreeMapPreviewSplit',    'g'.NERDTreeMapOpenSplit)
+let g:NERDTreeMapPreviewVSplit   = get(g:, 'NERDTreeMapPreviewVSplit',   'g'.NERDTreeMapOpenVSplit)
+let g:NERDTreeMapQuit            = get(g:, 'NERDTreeMapQuit',            'q')
+let g:NERDTreeMapRefresh         = get(g:, 'NERDTreeMapRefresh',         'r')
+let g:NERDTreeMapRefreshRoot     = get(g:, 'NERDTreeMapRefreshRoot',     'R')
+let g:NERDTreeMapToggleBookmarks = get(g:, 'NERDTreeMapToggleBookmarks', 'B')
+let g:NERDTreeMapToggleFiles     = get(g:, 'NERDTreeMapToggleFiles',     'F')
+let g:NERDTreeMapToggleFilters   = get(g:, 'NERDTreeMapToggleFilters',   'f')
+let g:NERDTreeMapToggleHidden    = get(g:, 'NERDTreeMapToggleHidden',    'I')
+let g:NERDTreeMapToggleZoom      = get(g:, 'NERDTreeMapToggleZoom',      'A')
+let g:NERDTreeMapUpdir           = get(g:, 'NERDTreeMapUpdir',           'n')
+let g:NERDTreeMapUpdirKeepOpen   = get(g:, 'NERDTreeMapUpdirKeepOpen',   'N')
+let g:NERDTreeMapCWD             = get(g:, 'NERDTreeMapCWD',             'CD')
+let g:NERDTreeMenuDown           = get(g:, 'NERDTreeMenuDown',           'e')
+let g:NERDTreeMapJumpLastChild   = get(g:, 'NERDTreeMapJumpLastChild',   'E')
+let g:NERDTreeMapJumpNextSibling = get(g:, 'NERDTreeMapJumpNextSibling', '<C-e>')
+let g:NERDTreeMenuUp             = get(g:, 'NERDTreeMenuUp',             'u')
+let g:NERDTreeMapJumpFirstChild  = get(g:, 'NERDTreeMapJumpFirstChild',  'U')
+let g:NERDTreeMapJumpPrevSibling = get(g:, 'NERDTreeMapJumpPrevSibling', '<C-u>')
+"}}}
