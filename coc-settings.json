@@ -70,7 +70,7 @@
 		"typescript",
 		"html",
 		"css",
-		"json",
+		// "json",
 		"python",
 		"vue",
 		"svelte",
@@ -215,16 +215,16 @@
 			"args": ["start"],
 			"filetypes": ["sh"],
 			"ignoredRootPaths": []
+		},
+		"ccls": {
+			"command": "ccls",
+			"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+			"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
 		}
-		//"ccls": {
-		//	"command": "ccls",
-		//	"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-		//	"rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".git/", ".hg/"],
-		//	"initializationOptions": {
-		//		"cache": {
-		//			"directory": "/tmp/ccls"
-		//		}
-		//	}
-		//}
 	}
 }

@@ -4,6 +4,7 @@
 " / /_ / /  >  <    \ V / | | | | | | |
 "/____/___|/_/\_\    \_/  |_|_| |_| |_|
 
+
 let mapleader=" "
 function! MySys()
     if has("win32")
@@ -56,7 +57,7 @@ set shortmess=atl
 set formatoptions=tcrqn
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+		  " \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 "let &t_SI = \"<Esc>]50;CursorShape=1\x7"
 "let &t_SR = \"<Esc>]50;CursorShape=2\x7"
@@ -95,7 +96,17 @@ set pyxversion=3
 "set fillchars=vert:\,stl:\,stlnc:\
 set hidden
 set tags=tags
-set tags+=./tags
+" set tags+=./tags
+set tags+=./tags,./../tags,./../../tags
+set path+=./*,./../*,./../../*
+set cscopetag " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
+
+
+"gtags.vim 设置项
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
 
 exec 'nohl'
 
@@ -103,15 +114,14 @@ exec 'nohl'
 " autocmd TermOpen * startinsert
 " endif
 
-exec 'source '.g:VIMPATH.'/map.vim'
-exec 'source '.g:VIMPATH.'/plug.vim'
-" source ~/.config/nvim/map.vim
-" source ~/.config/nvim/plug.vim
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary neovim
+    exec 'source '.g:VIMPATH.'/plug.vim'
+endif
 
-autocmd FileType vim setlocal commentstring=\"\ %s
-autocmd FileType c,cpp,json setlocal commentstring=//\ %s
-autocmd FileType py setlocal commentstring=\#\ %s
-autocmd FileType markdown setlocal commentstring=<!--\ %s\-->
+exec 'source '.g:VIMPATH.'/map.vim'
 
 autocmd WinLeave * setlocal nocursorline
 " autocmd WinEnter * setlocal cursorline
@@ -184,6 +194,7 @@ function! ZzxRun()
 endfunc
 
 exec 'highlight Cursor guibg=Red'
+
 
 " ##### auto fcitx  ###########
 " let g:input_toggle = 1

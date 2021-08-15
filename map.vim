@@ -32,8 +32,8 @@ noremap <nowait> k n
 noremap <nowait> K N
 noremap <nowait> j e
 noremap <nowait> J E
-noremap <nowait> <M-u> {
-noremap <nowait> <M-e> }
+" noremap <nowait> <M-u> {
+" noremap <nowait> <M-e> }
 noremap <nowait> <silent> ]p p
 noremap <nowait> <silent> p ]p
 noremap <nowait> <silent> n h
@@ -42,9 +42,11 @@ noremap <nowait> <silent> I $
 noremap <nowait> <silent> i l
 noremap <nowait> <silent> h i
 noremap <nowait> <silent> u k
+nnoremap <nowait> <silent> U 10k
+vnoremap <nowait> <silent> U 3k
 noremap <nowait> <silent> e j
-nnoremap <nowait> <silent> U 10<Up>
-nnoremap <nowait> <silent> E 10<Down>
+nnoremap <nowait> <silent> E 10j
+vnoremap <nowait> <silent> E 3j
 noremap <nowait> <silent> H I
 noremap <nowait> <silent> <LEADER>ay ggyG
 noremap <nowait> <silent> <LEADER>ad ggdG
@@ -72,8 +74,10 @@ noremap <nowait> <silent> <M-E> <C-w><Down>
 noremap <nowait> <silent> <M-U> <C-w><Up>
 noremap <nowait> <silent> <LEADER>ta :tabe<CR>
 noremap <nowait> <silent> tt :NERDTreeToggle<CR>
-noremap <nowait> <silent> <M-n> :-tabnext<CR>
-noremap <nowait> <silent> <M-i> :+tabnext<CR>
+nnoremap <nowait> <silent> <M-n> :-tabnext<CR>
+nnoremap <nowait> <silent> <M-i> :+tabnext<CR>
+inoremap <nowait> <silent> <M-i> <Right>
+inoremap <nowait> <silent> <M-n> <Left>
 noremap <nowait> ; :
 
 " nmap <CR> <nop>
@@ -85,18 +89,20 @@ nnoremap <nowait> <silent> <M-q> :q!<CR>
 nnoremap <nowait> <silent> <M-w> :w<CR>
 nnoremap <nowait> <silent> <M-r> :source $MYVIMRC<CR>
 inoremap <nowait> <silent> <M-r> <ESC>:source $MYVIMRC<CR>a
+inoremap nn <Esc>
 " nnoremap <nowait> <silent> <M-t> :CocCommand explorer<CR>
 nnoremap <nowait> <silent> <M-t> :RangerWorkingDirectoryNewTab<CR>
 noremap <nowait> <silent> <LEADER>ww :w !sudo tee %<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
-noremap! <nowait> <silent> <M-w> <Esc>:w<CR>"
+noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
 noremap! <nowait>  <Esc>
 noremap <nowait> <silent> <M-o> o<Esc>O
 nnoremap > >>
 nnoremap < <<
-nnoremap <LEADER>LG :call system('st -e sh -c lazygit')<cr>
+nnoremap <LEADER>lg :call system('st -e sh -c lazygit')<cr>
 nnoremap <silent> <LEADER>ff :silent Vifm<CR>
+nnoremap <silent> <LEADER>d <C-]>
 " fold and unfold {{{
 noremap <LEADER>o za
 noremap <LEADER>zf :call Fold()<CR>
