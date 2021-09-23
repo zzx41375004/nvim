@@ -11,6 +11,7 @@ call plug#begin(plug_file_path)
 Plug 'vifm/vifm.vim'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
+Plug 'Yilin-Yang/vim-markbar'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 "Plug 'vim-scripts/fcitx.vim'
@@ -59,7 +60,7 @@ Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 " Bookmarks
 Plug 'kshenoy/vim-signature'
@@ -74,7 +75,7 @@ Plug 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to 
 Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 " Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
@@ -309,3 +310,9 @@ let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 " 禁用 gutentags 自动加载 gtags 数据库的行为
 let g:gutentags_auto_add_gtags_cscope = 0
 " }}}
+"
+
+"markbar
+nmap M <Plug>ToggleMarkbar
+let g:markbar_next_mark_mapping = 'k'
+let g:markbar_previous_mark_mapping = 'K'

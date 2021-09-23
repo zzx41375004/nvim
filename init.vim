@@ -24,6 +24,7 @@ else
     let g:VIMPATH = "~/.config/nvim"
 endif
 
+set foldlevelstart=99
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set shortmess+=c
@@ -56,7 +57,7 @@ set autochdir
 set shortmess=atl
 set formatoptions=tcrqn
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  " \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  " \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 "let &t_SI = \"<Esc>]50;CursorShape=1\x7"
@@ -99,14 +100,14 @@ set tags=tags
 " set tags+=./tags
 set tags+=./tags,./../tags,./../../tags
 set path+=./*,./../*,./../../*
-set cscopetag " 使用 cscope 作为 tags 命令
-set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
+" set cscopetag " 使用 cscope 作为 tags 命令
+" set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
 
 
 "gtags.vim 设置项
-let GtagsCscope_Auto_Load = 1
-let CtagsCscope_Auto_Map = 1
-let GtagsCscope_Quiet = 1
+" let GtagsCscope_Auto_Load = 1
+" let CtagsCscope_Auto_Map = 1
+" let GtagsCscope_Quiet = 1
 
 exec 'nohl'
 
@@ -130,10 +131,11 @@ autocmd BufEnter,BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufEnter,BufRead,BufNewFile *.md set fdm=marker
 autocmd BufEnter,BufRead,BufNewFile vifmrc set filetype=vim
 autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufEnter,BufRead,BufNewFile *.md set nocindent
 " U<C-j> for both expand and jump (make expand higher priority.)
 
-noremap <nowait> <LEADER>bb :call Compile()<CR>
-noremap <LEADER>B :call ZzxRun()<CR>
+noremap <nowait> <LEADER>nn :call Compile()<CR>
+noremap <LEADER>ne :call ZzxRun()<CR>
 nmap <silent> <nowait> <M-k> gcc
 vmap <silent> <nowait> <M-k> gc
 

@@ -1,12 +1,23 @@
+if has("win32")
+    let g:plug_file_path = "~/AppData/Local/nvim/plugged"
+    let g:VIMPATH = "~/AppData/Local/nvim"
+else
+    let g:plug_file_path = "~/.config/nvim/plugged"
+    let g:VIMPATH = "~/.config/nvim"
+endif
 let g:numberStatus = 0
 
 if !has('nvim')
     for i in range(97,122)
         let c = nr2char(i)
-        exec "set <M-.".c.">=\e".c.""
+        exec "set <M-".c.">=".c.""
     endfor
+	nnoremap <Esc>q :q!<cr>
     exec "set <M-->=\e-"
     exec "set <M-=>=\e="
+    let &t_SI.="\e[5 q" "SI = INSERT mode
+    let &t_SR.="\e[4 q" "SR = REPLACE mode
+    let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 endif
 
 command! -bar SplitRight :set splitright|:vsplit
@@ -42,9 +53,11 @@ noremap <nowait> <silent> I $
 noremap <nowait> <silent> i l
 noremap <nowait> <silent> h i
 noremap <nowait> <silent> u k
+noremap <nowait> <silent> <M-u> <nop>
 nnoremap <nowait> <silent> U 10k
 vnoremap <nowait> <silent> U 3k
 noremap <nowait> <silent> e j
+noremap <nowait> <silent> <M-e> <nop>
 nnoremap <nowait> <silent> E 10j
 vnoremap <nowait> <silent> E 3j
 noremap <nowait> <silent> H I
@@ -85,7 +98,7 @@ nnoremap <nowait> <silent> <up> :res +5<CR>
 nnoremap <nowait> <silent> <down> :res -5<CR>
 nnoremap <nowait> <silent> <left> :vertical resize -5<CR>
 nnoremap <nowait> <silent> <right> :vertical resize +5<CR>
-nnoremap <nowait> <silent> <M-q> :q!<CR>
+nnoremap <nowait> <silent> <A-q> :q!<CR>
 nnoremap <nowait> <silent> <M-w> :w<CR>
 nnoremap <nowait> <silent> <M-r> :source $MYVIMRC<CR>
 inoremap <nowait> <silent> <M-r> <ESC>:source $MYVIMRC<CR>a
@@ -96,7 +109,7 @@ noremap <nowait> <silent> <LEADER>ww :w !sudo tee %<CR>
 nnoremap <nowait> <LEADER>coc :set splitright<CR>:vsplit<CR>:CocConfig<CR>
 noremap <nowait> <silent> ? *
 noremap! <nowait> <silent> <M-w> <Esc>:w<CR>
-noremap! <nowait>  <Esc>
+" noremap! <nowait>  <Esc>
 noremap <nowait> <silent> <M-o> o<Esc>O
 nnoremap > >>
 nnoremap < <<
@@ -148,27 +161,27 @@ vnoremap <nowait>   <Esc>
 " }}}
 
 " number key {{{
-inoremap <nowait> tna 1
-inoremap <nowait> tnr 2
-inoremap <nowait> tns 3
-inoremap <nowait> tnt 4
-inoremap <nowait> tnd 5
-inoremap <nowait> tnh 6
-inoremap <nowait> tnn 7
-inoremap <nowait> tne 8
-inoremap <nowait> tni 9
-inoremap <nowait> tno 0
-inoremap <nowait> tnA !
-inoremap <nowait> tnR @
-inoremap <nowait> tnS #
-inoremap <nowait> tnT $
-inoremap <nowait> tnD %
-inoremap <nowait> tnH ^
-inoremap <nowait> tnN &
-inoremap <nowait> tnE *
-inoremap <nowait> tnI (
-inoremap <nowait> tnO )
-inoremap <nowait> tn<Enter> \n
+noremap! <nowait> tna 1
+noremap! <nowait> tnr 2
+noremap! <nowait> tns 3
+noremap! <nowait> tnt 4
+noremap! <nowait> tnd 5
+noremap! <nowait> tnh 6
+noremap! <nowait> tnn 7
+noremap! <nowait> tne 8
+noremap! <nowait> tni 9
+noremap! <nowait> tno 0
+noremap! <nowait> tnA !
+noremap! <nowait> tnR @
+noremap! <nowait> tnS #
+noremap! <nowait> tnT $
+noremap! <nowait> tnD %
+noremap! <nowait> tnH ^
+noremap! <nowait> tnN &
+noremap! <nowait> tnE *
+noremap! <nowait> tnI (
+noremap! <nowait> tnO )
+noremap! <nowait> tn<Enter> \n
 
 inoremap <nowait>  1 -
 inoremap <nowait>  2 =
